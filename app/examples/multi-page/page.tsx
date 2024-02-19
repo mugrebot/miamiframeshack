@@ -114,7 +114,7 @@ console.log("yeet3", currentSlideNumber);
       >
         <FrameImage>
           <div tw="flex flex-col">
-            <img width={200} height={200} src={ipfsUrl2 || ipfsUrl} alt="Image" />
+            <img width={200} height={200} src={ipfsUrl2} alt="Image" />
             <div tw="flex">
             This is slide {currentSlideNumber} / {totalPages}
             </div>
