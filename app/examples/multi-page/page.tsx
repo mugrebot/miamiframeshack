@@ -22,7 +22,7 @@ type State = {
 //fetchNFT will take in a page index and return the data for that page
 //remember to change the 1 in "https://dappapi.propy.com/nft/base/propykeys?perPage=20&page=1&landmark=true"
 
-const fetchNFTs = async (currentPage) => {
+const fetchNFTs = async (currentPage: number) => {
   const url = `https://dappapi.propy.com/nft/base/propykeys?perPage=20&page=${currentPage}&landmark=true`;
   const response = await fetch(url);
   const data = await response.json();
@@ -90,7 +90,7 @@ fetchNFTs(state.currentPage).then((newData) => {
 const imageUrl2 = data2.data.data[state.pageIndex].metadata.image;
 const ipfsUrl2 = imageUrl2.replace('ipfs://', 'https://ipfs.io/ipfs/')|| "https://i.stack.imgur.com/oeBTR.png";
 const currentNFT2 = data2.data.data[state.pageIndex];
-const nftAttributes2 = currentNFT2.metadata.attributes.reduce((acc, attr) => {
+const nftAttributes2 = currentNFT2.metadata.attributes.reduce((acc: { [x: string]: any; }, attr: { trait_type: string | number; value: any; }) => {
   acc[attr.trait_type] = attr.value;
   return acc;
 }, {});
