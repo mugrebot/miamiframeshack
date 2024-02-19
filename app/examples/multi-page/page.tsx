@@ -136,7 +136,7 @@ const basedScanURL = `https://zora.co/collect/base:${currentNFT2.asset.address}/
 View on Zora
 </FrameButton>
         <FrameButton action="link" target="https://propykeys.com">
-  Sign Up and Mint Your Own! @propy
+  Proppy Signup
 </FrameButton>
 
       </FrameContainer>
