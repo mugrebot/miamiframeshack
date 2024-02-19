@@ -83,7 +83,7 @@ const  metadata2 = data2?.metadata?.pagination?.totalPages;
 
 fetchNFTs(state.currentPage).then((newData) => {
   // Update your component state or context with newData here
-  console.log(`New data for currentPage ${state.currentPage}:`, newData);
+
 });
 
 //update ipfsURL and current NFT 
@@ -95,47 +95,48 @@ const nftAttributes2 = currentNFT2.metadata.attributes.reduce((acc: { [x: string
   return acc;
 }, {});
 
-console.log("yeet2", state.currentPage);
+
 const currentSlideNumber = (state.currentPage - 1) * itemsPerPage + state.pageIndex + 1;
 
-console.log("yeet3", currentSlideNumber);
+const basedScanURL = `https://zora.co/collect/base:${currentNFT2.asset.address}/${currentNFT2.balances[0].token_id}`
+
 
 
 
   // then, when done, return next frame
   return (
     <div>
-      Multi-page example {state.currentPage}<Link href="/debug">Debug</Link>
+      m00npapi.eth frame dale 305<Link href="/debug">Debug</Link>
       <FrameContainer
+      
         pathname="/examples/multi-page"
         postUrl="/examples/multi-page/frames"
         state={state}
         previousFrame={previousFrame}
       >
         <FrameImage>
-          <div tw="flex flex-col">
-            <img width={200} height={200} src={ipfsUrl2} alt="Image" />
-            <div tw="flex">
-            This is slide {currentSlideNumber} / {totalPages}
-            </div>
-            <div tw="flex">
-              Landmark: {nftAttributes2['Landmark']}
-            </div>
-            <div tw="flex">
-              Country: {nftAttributes2['Country']}
-            </div>
-            <div tw="flex">
-              Status: {nftAttributes2['Status']}
-            </div>
+        <img style={{ width: '400px', height: '336px'}}src={ipfsUrl2} alt="Image" />
+          <div tw="flex flex-col pt-6">
+            <div style={{ backgroundColor: '#533b7e'}} tw="flex flex-col p-4 shadow-lg rounded-lg text-7 text-white">
+              Location: {nftAttributes2['Address']}<br />
+              Status: {nftAttributes2['Status']} <br />
+              Coordinates: {currentNFT2.metadata.latitude} {currentNFT2.metadata.longitude} <br />
+              Asset Address: {currentNFT2.asset.address} <br />
+              Owner: {currentNFT2.balances[0].holder_address} <br />
+              </div>
+
+
           </div>
         </FrameImage>
         <FrameButton>←</FrameButton>
         <FrameButton>→</FrameButton>
+        <FrameButton action="link" target={basedScanURL}>
+View on Zora
+</FrameButton>
         <FrameButton action="link" target="https://propykeys.com">
-  Mint your Own! @propy
+  Sign Up and Mint Your Own! @propy
 </FrameButton>
 
-        
       </FrameContainer>
     </div>
   );
