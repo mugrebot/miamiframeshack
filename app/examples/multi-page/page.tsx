@@ -34,9 +34,6 @@ const fetchNFTs = async (currentPage) => {
 
 //lets call the function once the page loads, and only once
 
-export const data = await fetchNFTs(1);
-
-export const  metadata = data?.metadata?.pagination?.totalPages;
 
 
 const totalPages = 307;
@@ -78,18 +75,10 @@ export default async function Home({
 }: NextServerPageProps) {
   const previousFrame = getPreviousFrame<State>(searchParams);
   const [state] = useFramesReducer<State>(reducer, initialState, previousFrame);
-  const imageUrl = data.data.data[state.pageIndex].metadata.image;
-  //image url must be converted to https://ipfs.io/ipfs/UID format currently its in form
-  //ipfs://QmXuPehc8EYDnCVCrDSVuEUyBrWkUSKhkRwfquRVoUgFF5
-  const ipfsUrl = imageUrl.replace('ipfs://', 'https://ipfs.io/ipfs/')|| "https://i.stack.imgur.com/oeBTR.png";
-  const currentNFT = data.data.data[state.pageIndex];
-const nftAttributes = currentNFT.metadata.attributes.reduce((acc, attr) => {
-  acc[attr.trait_type] = attr.value;
-  return acc;
-}, {});
+
 
 const data2 = await fetchNFTs(state.currentPage);
-const  metadata2 = data?.metadata?.pagination?.totalPages;
+const  metadata2 = data2?.metadata?.pagination?.totalPages;
 
 
 fetchNFTs(state.currentPage).then((newData) => {
@@ -130,13 +119,13 @@ console.log("yeet3", currentSlideNumber);
             This is slide {currentSlideNumber} / {totalPages}
             </div>
             <div tw="flex">
-              Landmark: {nftAttributes2['Landmark'] || nftAttributes['Landmark']}
+              Landmark: {nftAttributes2['Landmark']}
             </div>
             <div tw="flex">
-              Country: {nftAttributes2['Country'] || nftAttributes['Country']}
+              Country: {nftAttributes2['Country']}
             </div>
             <div tw="flex">
-              Status: {nftAttributes2['Status'] || nftAttributes['Status']}
+              Status: {nftAttributes2['Status']}
             </div>
           </div>
         </FrameImage>
@@ -150,4 +139,6 @@ console.log("yeet3", currentSlideNumber);
       </FrameContainer>
     </div>
   );
+
+  
 }
