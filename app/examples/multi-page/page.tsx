@@ -34,7 +34,7 @@ const fetchNFTs = async (currentPage) => {
 
 //lets call the function once the page loads, and only once
 
-export const data = await fetchNFTs();
+export const data = await fetchNFTs(1);
 
 export const  metadata = data?.metadata?.pagination?.totalPages;
 
@@ -125,7 +125,7 @@ console.log("yeet3", currentSlideNumber);
       >
         <FrameImage>
           <div tw="flex flex-col">
-            <img width={573} height={300} src={ipfsUrl2 || ipfsUrl} alt="Image" />
+            <img width={200} height={200} src={ipfsUrl2 || ipfsUrl} alt="Image" />
             <div tw="flex">
             This is slide {currentSlideNumber} / {totalPages}
             </div>
@@ -142,7 +142,7 @@ console.log("yeet3", currentSlideNumber);
         </FrameImage>
         <FrameButton>←</FrameButton>
         <FrameButton>→</FrameButton>
-        <FrameButton action="link" target="propykeys.com">
+        <FrameButton action="link" target="https://propykeys.com">
   Mint your Own! @propy
 </FrameButton>
 
