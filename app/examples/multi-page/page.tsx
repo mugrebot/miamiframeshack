@@ -83,7 +83,7 @@ const  metadata2 = data2?.metadata?.pagination?.totalPages;
 
 fetchNFTs(state.currentPage).then((newData) => {
   // Update your component state or context with newData here
-
+  console.log(`New data for currentPage ${state.currentPage}:`, newData);
 });
 
 //update ipfsURL and current NFT 
@@ -115,12 +115,14 @@ const basedScanURL = `https://zora.co/collect/base:${currentNFT2.asset.address}/
         previousFrame={previousFrame}
       >
         <FrameImage>
-        <img style={{ width: '400px', height: '336px'}}src={ipfsUrl2} alt="Image" />
+          <div tw="flex flex-col" style={{ backgroundColor: '#533b7e'}}> 
+        <img style={{ width: '250px', height: '210px', objectFit: 'contain'}}src={ipfsUrl2} alt="Image" />
+        </div>
           <div tw="flex flex-col pt-6">
             <div style={{ backgroundColor: '#533b7e'}} tw="flex flex-col p-4 shadow-lg rounded-lg text-7 text-white">
               Location: {nftAttributes2['Address']}<br />
               Status: {nftAttributes2['Status']} <br />
-              Coordinates: {currentNFT2.metadata.latitude}, {currentNFT2.metadata.longitude} <br />
+              Coordinates: {currentNFT2.metadata.latitude} {currentNFT2.metadata.longitude} <br />
               Asset Address: {currentNFT2.asset.address} <br />
               Owner: {currentNFT2.balances[0].holder_address} <br />
               </div>
