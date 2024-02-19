@@ -120,7 +120,7 @@ const basedScanURL = `https://zora.co/collect/base:${currentNFT2.asset.address}/
             <div style={{ backgroundColor: '#533b7e'}} tw="flex flex-col p-4 shadow-lg rounded-lg text-7 text-white">
               Location: {nftAttributes2['Address']}<br />
               Status: {nftAttributes2['Status']} <br />
-              Coordinates: {currentNFT2.metadata.latitude} {currentNFT2.metadata.longitude} <br />
+              Coordinates: {currentNFT2.metadata.latitude}, {currentNFT2.metadata.longitude} <br />
               Asset Address: {currentNFT2.asset.address} <br />
               Owner: {currentNFT2.balances[0].holder_address} <br />
               </div>
