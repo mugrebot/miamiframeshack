@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   // without a title, warpcast won't validate your frame
-  title: "frames.js starter",
+  title: "m00npapi dale305 hack submission",
   description: "...",
 };
 
