@@ -8,6 +8,7 @@ import {
   useFramesReducer,
 } from "frames.js/next/server";
 import Link from "next/link";
+import { metadata } from "../../layout";
 
 type State = {
   pageIndex: number;
@@ -34,12 +35,15 @@ const fetchNFTs = async (currentPage: number) => {
 
 //lets call the function once the page loads, and only once
 
+//total pages needs to be dynamic
 
 
-const totalPages = 307;
-const initialState: State = { pageIndex: 0, currentPage: 1};
+
+const initialState: State = { pageIndex: 1, currentPage: 1};
 
 const itemsPerPage = 20; // Assuming 20 items per page
+
+
 
 const reducer: FrameReducer<State> = (state, action) => {
   let { pageIndex, currentPage } = state;
@@ -95,10 +99,12 @@ const nftAttributes2 = currentNFT2.metadata.attributes.reduce((acc: { [x: string
   return acc;
 }, {});
 
+console.log(currentNFT2); 
+
 
 const currentSlideNumber = (state.currentPage - 1) * itemsPerPage + state.pageIndex + 1;
 
-const basedScanURL = `https://zora.co/collect/base:${currentNFT2.asset.address}/${currentNFT2.balances[0].token_id}`
+const basedScanURL = `https://dapp.propy.com/#/token/base/${currentNFT2.asset.address}/${currentNFT2.balances[0].token_id}`
 
 
 
@@ -115,11 +121,11 @@ const basedScanURL = `https://zora.co/collect/base:${currentNFT2.asset.address}/
         previousFrame={previousFrame}
       >
         <FrameImage>
-          <div tw="flex flex-col" style={{ backgroundColor: '#533b7e'}}> 
-        <img style={{ width: '250px', height: '210px', objectFit: 'contain'}}src={ipfsUrl2} alt="Image" />
-        </div>
-          <div tw="flex flex-col pt-6">
-            <div style={{ backgroundColor: '#533b7e'}} tw="flex flex-col p-4 shadow-lg rounded-lg text-7 text-white">
+
+        <img style={{zIndex: 0}}tw="w-full aspect-w-191 aspect-h-100 h-full bg-black" src={ipfsUrl2} alt="Image" />
+
+          <div tw="flex absolute" style={{zIndex:100, bottom:0, left: 0}}>
+            <div style={{ backgroundColor: '#533b7e'}} tw="flex flex-col p-4 shadow-lg rounded-lg text-5.5 text-white">
               Location: {nftAttributes2['Address']}<br />
               Status: {nftAttributes2['Status']} <br />
               Coordinates: {currentNFT2.metadata.latitude} {currentNFT2.metadata.longitude} <br />
@@ -133,7 +139,7 @@ const basedScanURL = `https://zora.co/collect/base:${currentNFT2.asset.address}/
         <FrameButton>←</FrameButton>
         <FrameButton>→</FrameButton>
         <FrameButton action="link" target={basedScanURL}>
-View on Zora
+View on Proppy!
 </FrameButton>
         <FrameButton action="link" target="https://propykeys.com">
   Proppy Signup
