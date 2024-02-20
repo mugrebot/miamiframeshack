@@ -101,10 +101,31 @@ const nftAttributes2 = currentNFT2.metadata.attributes.reduce((acc: { [x: string
 
 console.log(currentNFT2); 
 
+// get the size of the image at ipfsURL2
+
+const fetchImageSize = async (url: string) => {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  return blob;
+}
+
+const imageSize2 = await fetchImageSize(ipfsUrl2);
+console.log(imageSize2.size, 'maybe?');
+
+const imageCheck = imageSize2.size > 17000;
 
 const currentSlideNumber = (state.currentPage - 1) * itemsPerPage + state.pageIndex + 1;
 
 const basedScanURL = `https://dapp.propy.com/#/token/base/${currentNFT2.asset.address}/${currentNFT2.balances[0].token_id}`
+
+console.log(imageCheck);
+
+
+
+
+
+
+
 
 
 
@@ -122,9 +143,13 @@ const basedScanURL = `https://dapp.propy.com/#/token/base/${currentNFT2.asset.ad
       >
         <FrameImage>
 
-        <img style={{zIndex: 0}}tw="w-full aspect-w-191 aspect-h-100 h-full bg-black" src={ipfsUrl2} alt="Image" />
+        {
+  imageCheck 
+    ? <img style={{zIndex: 0}} tw="aspect-w-191 aspect-h-100" width={300} height={268} src={ipfsUrl2} alt="Placeholder Image" />
+    : <img style={{zIndex: 0}} tw="aspect-w-191 aspect-h-100 w-full h-full" src={ipfsUrl2} alt="IPFS Image" />
+}
 
-          <div tw="flex absolute" style={{zIndex:100, bottom:0, left: 0}}>
+        <div tw="flex absolute" style={{zIndex:100, bottom:0, left: 0}}>
             <div style={{ backgroundColor: '#533b7e'}} tw="flex flex-col p-4 shadow-lg rounded-lg text-5.5 text-white">
               Location: {nftAttributes2['Address']}<br />
               Status: {nftAttributes2['Status']} <br />
@@ -135,6 +160,9 @@ const basedScanURL = `https://dapp.propy.com/#/token/base/${currentNFT2.asset.ad
 
 
           </div>
+
+
+       
         </FrameImage>
         <FrameButton>←</FrameButton>
         <FrameButton>→</FrameButton>
